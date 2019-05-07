@@ -1,0 +1,104 @@
+\documentclass{book}
+\usepackage[utf8]{inputenc}
+\usepackage{imakeidx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{tikz-cd} 
+\usepackage{dsfont}
+\usepackage{listings}
+\usepackage{ textcomp }
+\usepackage{tikz-cd}
+\usepackage{makeidx}
+\usepackage{fancyhdr}
+\usepackage{mathabx}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+
+
+\makeindex 
+\DeclareMathOperator{\Ima}{Im}
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\numberwithin{problem}{chapter}
+\newtheorem{solution}{Solution}
+\numberwithin{solution}{chapter}
+\newtheorem{theorem}{Theorem}
+\numberwithin{theorem}{chapter}
+\newtheorem{definition}{Definition}
+\numberwithin{definition}{chapter}
+\newtheorem{example}{Example}
+\numberwithin{example}{chapter}
+\newtheorem{remark}{Remark}
+\numberwithin{remark}{chapter}
+\newtheorem{claim}{Claim}
+\numberwithin{claim}{chapter}
+\newtheorem{fact}{Fact}
+\numberwithin{fact}{chapter}
+\newtheorem{preliminary}{Preliminary}
+\numberwithin{preliminary}{chapter}
+\newtheorem{corollary}{Corollary}
+\numberwithin{corollary}{theorem}
+\newtheorem{lemma}{Lemma}
+\numberwithin{lemma}{chapter}
+\newtheorem{proposition}{Proposition}
+\numberwithin{proposition}{chapter}
+\newcommand{\mm}{\mathcal{M}}
+\newcommand{\kernel}[1]{\text{ker}(#1)}
+\newcommand{\closure}[1]{\text{Cl}(#1)}
+\newcommand{\interior}[1]{\text{Int}(#1)}
+\newcommand{\spec}[1]{\text{Spec}(#1)}
+\newcommand{\jrad}[1]{\text{Rad}(#1)}
+\newcommand{\rref}[1]{\textcolor{red}{\nameref{#1}}}
+\newcommand{\deff}[1]{\textbf{\textcolor{red}{#1}}}
+\newcommand{\ann}[2]{\text{Ann}_{#1}(#2)}
+\newcommand{\dimens}[2]{\text{dim}_{#1}(#2)}
+\newcommand{\homom}[2]{\text{Hom}_{#1}(#2)}
+\newcommand{\tens}[1]{\mathbin{\mathop{\otimes}_{#1}}}
+\newcommand{\coker}[1]{\text{Coker}(#1)}
+\newcommand{\im}[1]{\text{Im}(#1)}
+\newcommand{\homo}[1]{\text{Hom}_R(#1, N)}
+\newcommand{\ass}[2]{\text{Ass}_{#1}(#2)}
+\newcommand{\supp}[2]{\text{Supp}_{#1}(#2)}
+\newcommand{\rdimens}[1]{\text{dim}(#1)}
+\newcommand{\height}[1]{\text{ht}(#1)}
+\newcommand{\mspec}[1]{m\text{-}\spec{#1}}
+\newcommand{\trace}[0]{\text{trace}}
+\newcommand{\entry}[2]{\noindent[#1]: #2}
+\newcommand{\intt}[0]{\mathrm{o}}
+\newcommand{\bu}[1]{#1^{*}}
+\newcommand{\pr}[1]{\left( #1\right)}
+\newcommand{\ab}[1]{\left|#1 \right|}
+\renewcommand\qedsymbol{\textbf{Q.E.D}}
+\renewcommand\hat{\widetilde}
+\pagestyle{fancyplain}
+\fancyhf{}
+\lhead{ \fancyplain{}{James Marshall Reber} }
+\rhead{ \fancyplain{}{\today} }
+\rfoot{ \fancyplain{}{\thepage} }
+\def\MapleInput#1{\noindent{{\small $>$ {\tt \textcolor{red}{#1} }}}}
+
+\title{Probability}
+\author{James}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+
+
+
+\printindex
+
+
+\end{document}
+
