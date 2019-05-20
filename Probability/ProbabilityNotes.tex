@@ -94,7 +94,166 @@
 
 \newpage
 
+\chapter{Discrete Probability}
 
+The informal idea for doing probability is that we have some global set (generally denoted with $\Omega$) and we would like to create a function going from this global set to the real numbers (denoted by $\mathbb{R}$) such that these values correspond to the ``likeliness'' that such an event will occur. However, formally doing this requires a lot of language. I'll try to throw in some of these key ideas when I can, but I will also try not to make things super boring or technical to read.
+
+Since our domain is going to be a space of sets, we'll start by formalizing some set theoretic notions.
+
+\section{Set Theory}
+
+\subsection{Sets} 
+
+\begin{definition} \index{Set}
+Informally speaking, a \deff{set} is a collection of objects.
+\end{definition}
+
+\begin{example} \label{ex:1}
+\begin{enumerate}[(a)]
+    \item The collection $\{1,2,3\}$ is a set. 
+    \item The collection of all \textit{positive} numbers $\{1,2,3, \ldots\}$ is a set. We call this set the \deff{natural numbers}, and denote it by $\mathbb{N}$.
+    \item The collection of all numbers $\{\ldots,-2,-1,0,1,2,\ldots\}$ is a set. We call this set the \deff{integers}, and it is denoted by $\mathbb{Z}$.
+\end{enumerate}
+\end{example}
+
+We have a few operations associated to sets, which we will want to use.
+
+\begin{definition} \index{Union}
+We have that the \deff{union} of two sets $A$ and $B$ is the collection of all elements either in $A$ or $B$. It is generally denoted with a cup, $\cup$. Using something called \deff{set builder notation}, we can write this as 
+\[ A \cup B = \{ x \ : \ x \in A \text{ or } x \in B \}. \]
+This is read as ``the collection of elements $x$ such that $x$ is in (the set) $A$ or $x$ is in (the set) $B$.'' We have that the braces tells us that this is a set, and the symbol $\in$ tells us that the element is in the corresponding set. 
+\end{definition}
+
+\begin{definition} \index{Intersection}
+We define the \deff{intersection} of two sets $A$ and $B$ to be the collection of elements that are in both $A$ and $B$, denoted with a cap, $\cap$. Using set builder notation, we have 
+\[ A \cap B = \{ x \ : \ x \in A \text{ and } x \in B \}.\]
+\end{definition}
+
+\begin{definition} \index{Set minus}
+We define the operation \deff{set minus} between two sets $A$ and $B$, denoted by $A - B$, to be the set of elements $x$ such that $x$ is in $A$ but $x$ is not in $B$. That is, we have 
+\[A - B = \{ x \ : \ x \in A \text{ but } x \notin B\}. \]
+\end{definition}
+
+We will generally have some global set $\Omega$, and so we have a special kind of set minus associated to this set.
+
+\begin{definition} \index{Complement}
+We define the operation \deff{complement} of $A$, denoted by $A^c$, to be the set of elements such that $x \notin A$ but $x \in \Omega$, which is some global set.
+\end{definition}
+
+\begin{remark}
+Using this, we can rewrite the set minus to instead be 
+\[A \cap B^c = A - B. \]
+This is sometimes a useful way of thinking about things.
+\end{remark}
+
+\begin{definition} \index{Subset}
+A set $A$ is said to be a \deff{subset} of another set $B$ if, for all $x \in A$, we have $x \in B$. We denote this by $A \subset B$. If there's a chance of equality, we write $A \subseteq B$ (similar to $<$ and $\leq$).
+\end{definition}
+
+\begin{definition} \index{Set equality}
+If two sets $A$ and $B$ are such that $A \subseteq B$ and $B \subseteq A$, then we have that $A = B$. In other words, we have \deff{set equality}. 
+\end{definition}
+
+\begin{problem}
+Prove that $(A \cup B)^c = A^c \cap B^c$.
+\end{problem}
+
+\begin{problem}
+If we have a countable collection of sets (for now, just assume this means infinite), then prove that 
+\[ \left( \bigcup_{\alpha = 1}^\infty A_\alpha \right)^c = \bigcap_{\alpha=1}^\infty A_\alpha^c.  \]
+Deduce that 
+\[ \left( \bigcap_{\alpha=1}^\infty A_\alpha \right)^c = \bigcup_{\alpha=1}^\infty A_\alpha^c.\]
+\end{problem}
+
+\subsection{Functions}
+
+Now, we want to have some way to relate sets, and a natural way to do this is through something called \deff{functions}. Intuitively, a function is a way of assigning values from one set to another set, or in other words map elements from one set to another. Notationally, if we have a function $f$ which maps elements from a set $A$ (called the \deff{domain}) to a set $B$ (called the \deff{codomain}), then we denote this by $f : A \rightarrow B$.  There are some key properties we may want in a function.
+
+\begin{definition} \index{Injective}
+A function $f: A \rightarrow B$ is said to be \deff{injective} if $f(a) = f(b)$ implies that $a = b$.
+\end{definition}
+
+The intuition here is that we can place the set entirely in the codomain.
+
+\begin{definition} \index{Surjective}
+A function $f : A \rightarrow B$ is said to be \deff{surjective} if, for all $b \in B$, there exists an $a \in A$ such that $f(a) = b$.
+\end{definition}
+
+The intuition here is that we hit everything in the codomain.
+
+\begin{definition} \index{Bijective}
+A function $f : A \rightarrow B$ is said to be \deff{bijective} if it is injective \textbf{\textit{and}} surjective.
+\end{definition}
+
+In some ways, this is defining an equivalence between sets. Two sets are essentially the same if they are bijective, since we can view the elements from one set as elements from the other set under the viewpoint of this function. 
+
+With finite sets, this is extremely intuitive. This, in some sense, gives us a way of measuring sizes of sets; two sets are of the same size if there exists a bijection between them. However, going to infinite sets, this intuition falls apart.
+
+\begin{example}
+ Does there exist a bijection between $\mathbb{N} \cup \{0\}$ and $\mathbb{N}$? Intuitively, no. One obviously has one more element than the other, so they shouldn't be the ``same size.'' However, it turns out the answer is there does indeed exist one. Let $f : \mathbb{N} \cup \{0\} \rightarrow \mathbb{N}$ be a function such that $f(n) = n+1$. Then we need to show that this function is injective and surjective. 
+    
+    Starting with injectivity, we need to show that if $f(n) = f(m)$, then $n = m$. If $f(n) = f(m)$, we have $f(n) = n + 1 = m + 1 = f(m)$. Subtracting one from both sides gives $n = m$. Thus, we have an injection!
+    
+    Next, with surjectivity, we need to show that for every element $m$ in $\mathbb{N}$, we can find an element $n$ in $\mathbb{N} \cup \{0\}$ such that $f(n) = m$. The clear choice is that we take $n = m-1$. Then $f(m-1) = (m-1) + 1 = m$, and so we have a surjection!
+    
+    So, $f$ is both injective and surjective, and so bijective. So these sets are the same size.
+\end{example}
+
+This gives us a basis for size. If things are the same size as $\mathbb{N}$, we say that the set is \deff{countable}.
+
+\begin{problem}
+Prove that $\mathbb{Z}$ is countable.
+\end{problem}
+
+\begin{problem}
+(Hard) Prove that 
+\[\mathbb{Q} = \left\{ \frac{p}{q} \ : \ p \in \mathbb{Z}, q \in \mathbb{Z} - \{0\} \right\} \]
+is a countable set. If too hard to prove, find a reference that does it and discuss.
+\end{problem}
+
+\begin{problem}
+Prove (or find a reference) that $\mathbb{R}$ is \textbf{not} countable. This is our first example of a set which is bigger than $\mathbb{N}$.
+\end{problem}
+
+\section{Counting}
+
+Let's now consider a set of $n$ elements (let's denote this by $A = \{1, 2, \ldots, n\}$), and let's consider the number of bijective maps to itself. 
+
+\begin{problem}
+Before reading on, what exactly does this represent in terms of arranging things?
+\end{problem}
+
+What this represents is the number of ways to arrange $n$ objects in $n$ spots \textit{without} replacement. That is, we cannot have more than $1$, more than $2$, etc. The intuition here is to imagine we have $n$ holes and $n$ objects (the holes here represent where the object is going to, and the objects represent the elements in the domain). We have $n$ choices for placing objects in the first hole. Once we have placed one, though, it goes down to $n-1$ choices for the second hole, and then $n-2$ for the next, and so on and so forth. This is the combinatorial proof for the following theorem.
+
+\begin{theorem}
+The number of bijective functions from $\{1,2,\ldots,n\}$ to itself is $n \cdot n-1 \cdot n-2 \cdots 1$. We denote this by $n!$.
+\end{theorem}
+
+\begin{remark}
+This is an important value which will come up often in the things ahead. 
+\end{remark}
+
+Next, let's try to generalize things, and just try to count the number of maps (not necessarily injective, surjective, or bijective) from a set $A = \{1, 2, \ldots, n\}$ to itself. Using the same philosophy as before, we have that we have $n$ choices for the first hole, but then we also have $n$ choices for the second hole, since it does not need to be necessarily injective. So we go down the line and we keep getting $n$ choices for each element. Therefore, the number of functions from $A$ to itself is $n^n$.
+
+However, since we didn't need to have bijective functions, we don't need this to go to itself. What if, for example, we looked at the number of functions from $A = \{1, 2, \ldots, n\}$ to another set $B = \{1, 2, \ldots, m\}$? We have $n$ choices for the first hole, $n$ choices for the second, all the way up to $n$ choices for the $m^\text{th}$ hole. Following the multiplicative property, we have $n^m$ total functions.
+
+\begin{theorem}
+The number of functions between a set $\{1,2,\ldots,n\}$ to a set $\{1,2,\ldots,m\}$ is $n^m$.
+\end{theorem}
+
+\begin{remark}
+I'll remark here that we've been using the sets $\{1,2,\ldots,n\}$, however what we're \textit{really} saying here is a set of size $n$, since we can construct a bijection from that set to this set (so going back, these sets are equivalent).
+\end{remark}
+
+\begin{problem}
+If you roll two six sided die, how many different possible combinations of numbers do we have
+\end{problem}
+
+\begin{problem}
+Six rocks are sitting in a straight line. We paint them using up to three colors (said red, white and blue). If the colors of the rocks are listed, left-to-right, then one possible outcome is RBBBWB. How many different ways are there of arranging the different rocks with the different colors? What if we place the restriction that we can use each color twice?
+\end{problem}
+
+So we've done placing without replacement, and placing with replacement. In both cases, we have had that order does not matter. Let's now consider where order matters and repetition is not allowed.    
 
 
 \printindex
